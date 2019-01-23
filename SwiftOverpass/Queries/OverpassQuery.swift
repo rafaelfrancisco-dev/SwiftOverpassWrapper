@@ -15,6 +15,7 @@ public protocol OverpassQuery: class {
     var parent: OverpassQuery? { get }
     var tags: [String: OverpassTag] { get set }
     var boundingBox: BoudingBox? { get set }
+    var around: Around? { get set }
 }
 
 extension OverpassQuery {
