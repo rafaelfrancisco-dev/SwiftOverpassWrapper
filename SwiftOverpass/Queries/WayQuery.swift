@@ -19,7 +19,8 @@ public final class WayQuery: OverpassQuery, NodeReferable, RelationReferable {
     public private(set) weak var parent: OverpassQuery?
     public var tags: [String : OverpassTag] = [:]
     public var boundingBox: BoudingBox?
-    
+    public var around: Around?
+
     public init(parent: OverpassQuery? = nil) {
         self.parent = parent
     }

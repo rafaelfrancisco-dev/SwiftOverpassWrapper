@@ -77,7 +77,12 @@ public final class XMLQueryBuilder: QueryBuilder {
         if let bbox = query.boundingBox {
             element.addChild(makeBboxQueryElement(bbox))
         }
-        
+
+        // Add <around> element to <query> element as child
+        if let around = query.around {
+            element.addChild(makeAroundElement(around))
+        }
+
         return element
     }
     
@@ -121,5 +126,9 @@ public final class XMLQueryBuilder: QueryBuilder {
     
     private func makeBboxQueryElement(_ bbox: BoudingBox) -> AEXMLElement {
         return AEXMLElement(name: "bbox-query", attributes: ["s" : "\(bbox.s)", "n" : "\(bbox.n)", "w" : "\(bbox.w)", "e" : "\(bbox.e)"])
+    }
+
+    private func makeAroundElement(_ around: Around) -> AEXMLElement {
+        return AEXMLElement(name: "around", attributes: ["lat": "\(around.lat)", "lon": "\(around.lon)", "radius": "\(around.radius)"])
     }
 }
