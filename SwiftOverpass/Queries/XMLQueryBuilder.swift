@@ -15,13 +15,15 @@ public final class XMLQueryBuilder: QueryBuilder {
     let order: OverpassApi.OutputOrder?
     let timeout: Int?
     let elementLimit: Int?
+    let recurseType: String?
     
-    init(queries: [OverpassQuery], verbosity: OverpassApi.OutputVerbosity?, order: OverpassApi.OutputOrder?, timeout: Int?, elementLimit: Int?) {
+    init(queries: [OverpassQuery], verbosity: OverpassApi.OutputVerbosity?, order: OverpassApi.OutputOrder?, timeout: Int?, elementLimit: Int?, resurseType: String?) {
         self.queries = queries
         self.verbosity = verbosity
         self.order = order
         self.timeout = timeout
         self.elementLimit = elementLimit
+        self.recurseType = resurseType
     }
     
     public func makeQuery() -> String {
@@ -62,9 +64,19 @@ public final class XMLQueryBuilder: QueryBuilder {
         if let order = order, order == .qt {
             printAttributes["order"] = order.stringValue
         }
+        if let recurseType = recurseType {
+            osmScript.addChild(makeUnionElement(recurseType: recurseType))
+        }
         osmScript.addChild(name: "print", attributes: printAttributes)
         
         return doc.xmlCompact
+    }
+
+    private func makeUnionElement(recurseType: String) -> AEXMLElement {
+        let element = AEXMLElement(name: "union")
+        element.addChild(name: "item")
+        element.addChild(name: "recurse", attributes: ["type": recurseType])
+        return element
     }
     
     private func makeQueryElement(_ query: OverpassQuery) -> AEXMLElement {
