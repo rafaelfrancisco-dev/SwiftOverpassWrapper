@@ -21,9 +21,10 @@ public final class SwiftOverpass: NSObject {
      - parameter endpoint: URL of the Overpass api server
      - parameter timeout: Time to wait between tries
      - parameter elementLimit: Max number of output
+     - parameter recurseType: Type of recurse
     */
-    public static func api(endpoint: String, timeout: Int? = nil, elementLimit: Int? = nil) -> OverpassApi {
-        return OverpassApi(endpoint: endpoint, timeout: timeout, elementLimit: elementLimit)
+    public static func api(endpoint: String, timeout: Int? = nil, elementLimit: Int? = nil, recurseType: String? = nil) -> OverpassApi {
+        return OverpassApi(endpoint: endpoint, timeout: timeout, elementLimit: elementLimit, recurseType: recurseType)
     }
 }
 
@@ -91,6 +92,8 @@ public final class OverpassApi {
     public fileprivate(set) var timeout: Int?
     /// Max number of output (m)
     public fileprivate(set) var elementLimit: Int?
+    /// Set recurse type
+    public fileprivate(set) var recurseType: String?
     
     // MARK: - Initializers
     
@@ -100,11 +103,13 @@ public final class OverpassApi {
      - parameter endpoint: URL of the Overpass server
      - parameter timeout: Time to wait between tries (m)
      - parameter elementLimit: Max number of output
+     - parameter recurseType: Type of recurse
      */
-    internal init(endpoint: String, timeout: Int? = nil, elementLimit: Int? = nil) {
+    internal init(endpoint: String, timeout: Int? = nil, elementLimit: Int? = nil, recurseType: String? = nil) {
         self.endpoint = endpoint
         self.timeout = timeout
         self.elementLimit = elementLimit
+        self.recurseType = recurseType
     }
     
     // MARK: - Public
@@ -118,7 +123,7 @@ public final class OverpassApi {
      - parameter completion: A completion handler.
      */
     public func fetch(_ queries: [OverpassQuery], verbosity: OutputVerbosity? = nil, order: OutputOrder? = nil, completion: @escaping CompletionClosure) {
-        let builder = XMLQueryBuilder(queries: queries, verbosity: verbosity, order: order, timeout: timeout, elementLimit: elementLimit)
+        let builder = XMLQueryBuilder(queries: queries, verbosity: verbosity, order: order, timeout: timeout, elementLimit: elementLimit, recurseType: recurseType)
         
         let parameters: [String : String] = ["data" : builder.makeQuery()]
         
