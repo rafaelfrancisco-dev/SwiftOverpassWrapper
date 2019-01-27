@@ -17,13 +17,13 @@ public final class XMLQueryBuilder: QueryBuilder {
     let elementLimit: Int?
     let recurseType: String?
     
-    init(queries: [OverpassQuery], verbosity: OverpassApi.OutputVerbosity?, order: OverpassApi.OutputOrder?, timeout: Int?, elementLimit: Int?, resurseType: String?) {
+    init(queries: [OverpassQuery], verbosity: OverpassApi.OutputVerbosity?, order: OverpassApi.OutputOrder?, timeout: Int?, elementLimit: Int?, recurseType: String?) {
         self.queries = queries
         self.verbosity = verbosity
         self.order = order
         self.timeout = timeout
         self.elementLimit = elementLimit
-        self.recurseType = resurseType
+        self.recurseType = recurseType
     }
     
     public func makeQuery() -> String {

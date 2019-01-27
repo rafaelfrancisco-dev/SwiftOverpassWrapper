@@ -123,7 +123,7 @@ public final class OverpassApi {
      - parameter completion: A completion handler.
      */
     public func fetch(_ queries: [OverpassQuery], verbosity: OutputVerbosity? = nil, order: OutputOrder? = nil, completion: @escaping CompletionClosure) {
-        let builder = XMLQueryBuilder(queries: queries, verbosity: verbosity, order: order, timeout: timeout, elementLimit: elementLimit, resurseType: recurseType)
+        let builder = XMLQueryBuilder(queries: queries, verbosity: verbosity, order: order, timeout: timeout, elementLimit: elementLimit, recurseType: recurseType)
         
         let parameters: [String : String] = ["data" : builder.makeQuery()]
         
