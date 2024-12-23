@@ -10,7 +10,7 @@ import Foundation
 
 /**
 */
-public protocol OverpassQuery: class {
+public protocol OverpassQuery: AnyObject {
     var type: ElementType { get }
     var parent: OverpassQuery? { get }
     var tags: [String: OverpassTag] { get set }

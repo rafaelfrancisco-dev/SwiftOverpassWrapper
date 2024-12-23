@@ -54,7 +54,7 @@ public final class OverpassResponse: OverpassResponseElementsProviding {
     /**
      Creates a `OverpassResponse`
     */
-    internal convenience init(response: DataResponse<String>, requestQuery: String) throws {
+    internal convenience init(response: DataResponse<String, AFError>, requestQuery: String) throws {
         let xml = String(data: response.data!, encoding: String.Encoding.utf8)!
         
         try self.init(xml: xml, requestQuery: requestQuery)

@@ -131,7 +131,7 @@ public final class OverpassApi {
             "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8"
         ]
         
-        Alamofire.request(endpoint, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: headers).responseString { (response) in
+        AF.request(endpoint, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: headers).responseString { (response) in
             
             guard nil == response.error else {
                 completion(nil, response.error)

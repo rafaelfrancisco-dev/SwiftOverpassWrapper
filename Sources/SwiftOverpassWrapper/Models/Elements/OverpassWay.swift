@@ -46,7 +46,7 @@ public final class OverpassWay: OverpassElement {
             
             var filtered = [OverpassNode]()
             nodeIds.forEach { id in
-                if let index = nodes.index(where: { $0.id == id }) {
+                if let index = nodes.firstIndex(where: { $0.id == id }) {
                     filtered.append(nodes[index])
                     return
                 }

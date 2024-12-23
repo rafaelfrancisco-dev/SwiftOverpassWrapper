@@ -58,7 +58,7 @@ public final class OverpassRelation: OverpassElement {
             
             var filtered = [OverpassNode]()
             nodeIds.forEach { id in
-                if let index = allNodes.index(where: { $0.id == id }) {
+                if let index = allNodes.firstIndex(where: { $0.id == id }) {
                     filtered.append(allNodes[index])
                     return
                 }
@@ -83,7 +83,7 @@ public final class OverpassRelation: OverpassElement {
             
             var filtered = [OverpassWay]()
             wayIds.forEach { id in
-                if let index = allWays.index(where: { $0.id == id }) {
+                if let index = allWays.firstIndex(where: { $0.id == id }) {
                     filtered.append(allWays[index])
                     return
                 }
@@ -108,7 +108,7 @@ public final class OverpassRelation: OverpassElement {
             
             var filtered = [OverpassRelation]()
             relIds.forEach { id in
-                if let index = allRels.index(where: { $0.id == id }) {
+                if let index = allRels.firstIndex(where: { $0.id == id }) {
                     filtered.append(allRels[index])
                     return
                 }

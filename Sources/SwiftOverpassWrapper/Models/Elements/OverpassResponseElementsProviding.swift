@@ -9,7 +9,7 @@
 import Foundation
 
 /// Provides the elements that were received with an response.
-public protocol OverpassResponseElementsProviding: class {
+public protocol OverpassResponseElementsProviding: AnyObject {
     /// All node elements that came with the response.
     var nodes: [OverpassNode]? { get }
     
